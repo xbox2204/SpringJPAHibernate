@@ -7,13 +7,16 @@ import org.example.db.service.BookService;
 import java.util.Map;
 
 public class ExampleMain {
+
+    private static final Logger LOGGER = LogManager.getLogger(Log4j2HelloWorldExample.class.getName());
+
     public static void main(String[] args){
         DbConfig dbConfig =new DbConfig();
-        System.out.println("DATABASE_URL= "+System.getenv("DATABASE_URL"));
+        LOGGER.info("DATABASE_URL= "+System.getenv("DATABASE_URL"));
 
         Map<String,Object> map = dbConfig.setPropFromEnv();
         for (Map.Entry entry:map.entrySet()){
-            System.out.println(entry.getKey()+"= "+entry.getValue().toString());
+            LOGGER.info(entry.getKey()+"= "+entry.getValue().toString());
         }
         Book book1 = new Book();
         book1.setAuthor_name("vineet");
@@ -21,6 +24,6 @@ public class ExampleMain {
         book1.setIsbn("007");
         BookService bookService = new BookService();
         bookService.insert(book1);
-        System.out.println("Book inserted in library!!!");
+        LOGGER.info("Book inserted in library!!!");
     }
 }
